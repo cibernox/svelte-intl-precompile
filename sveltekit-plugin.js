@@ -1,6 +1,8 @@
 const babel = require('@babel/core');
-const intlPrecompiler = require("babel-plugin-precompile-intl");
+const buildPlugin = require("babel-plugin-precompile-intl");
 const path = require('path');
+
+const intlPrecompiler = buildPlugin('svelte-intl-precompile');
 
 module.exports = function svelteIntlPrecompile(localesRoot) {  
 	return {
@@ -8,7 +10,8 @@ module.exports = function svelteIntlPrecompile(localesRoot) {
 		transform(code, id) {	
 			if (id.includes(path.resolve(localesRoot))) {
 				return babel.transform(code, {
-					plugins: [intlPrecompiler]
+					plugins: [intlPrecompiler],
+
 				}).code;
 			}
 		}
