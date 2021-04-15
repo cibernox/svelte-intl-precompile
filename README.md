@@ -48,7 +48,16 @@ When the above code is minified it will results in an output that compact that o
 "pluralized-with-hash":t=>`I have ${jt(t,{z:"no cats",o:`just ${t} cat`,h:`${t} cats`})}`
 ```
 
-The combination of a very small and treeshakeable runtime with moving the parsing into the build step results in an extremely small footprint, often < 2kb.
+The combination of a very small and treeshakeable runtime with moving the parsing into the build step results in an extremely small footprint and
+extremely fast performance.
+
+**How small, you may ask?** 
+Usually adds less than 2kb to your final build size after compression and minification, when compared with nearly 15kb that alternatives with
+a runtime ICU-message parser like `svelte-i18n` add.
+
+**How fast, you may also ask?** 
+When rendering a key that has also been rendered before around 25% faster. For initial rendering or rendering a keys that haven't been rendered 
+before, around 400% faster.
 
 ### Setup
 Install `svelte-intl-precompile` as a runtime dependency.
