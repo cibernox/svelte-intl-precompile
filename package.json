@@ -1,6 +1,6 @@
 {
   "name": "svelte-intl-precompile",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "i18n library for Svelte that analyzes your keys at build time for max performance and minimal footprint",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,6 @@
     "precompile-intl-runtime": "^0.2.5"
   },
   "dependencies": {
-    "babel-plugin-precompile-intl": "0.0.9"
+    "babel-plugin-precompile-intl": "0.0.10"
   }
 }
