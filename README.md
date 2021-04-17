@@ -87,9 +87,9 @@ module.exports = {
 			ssr: {
 				noExternal: Object.keys(pkg.dependencies || {})
 			},
-            plugins: [
-                precompileIntl('locales')
-            ]			
+			plugins: [
+				precompileIntl('locales')
+			]			
 		}
 	}
 };
@@ -102,15 +102,14 @@ Now you need some initialization code to register your locales and configure you
 ```html
 <script context="module">
 	import { addMessages, init /*, register */ } from 'svelte-intl-precompile';
-    import en from '../../locales/en.js';
+	import en from '../../locales/en.js';
 	// @ts-ignore
-    addMessages('en', en);
-    // register('es', () => import('../../locales/en.js')); <-- use this approach if you want locales to be load lazily
+	addMessages('en', en);
+	// register('es', () => import('../../locales/en.js')); <-- use this approach if you want locales to be load lazily
 
-
-    init({
+	init({
 		fallbackLocale: 'en',
-        initialLocale: { navigator: true }
+		initialLocale: { navigator: true }
 	});
 </script>
 
@@ -124,9 +123,9 @@ Now you need some initialization code to register your locales and configure you
 Now on your `.svelte` files you start translating using the t store exported from precompile-intl-runtime:
 ```html
 <script>
-  import { t } from 'svelte-intl-precompile'
+	import { t } from 'svelte-intl-precompile'
 </script>
 <footer class="l-footer">
-  <p class="t-footer">{$t("hightide")} {$t("footer.cta")}</p>
+	<p class="t-footer">{$t("hightide")} {$t("footer.cta")}</p>
 </footer>
 ```
