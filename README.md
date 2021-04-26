@@ -62,7 +62,7 @@ before, around 400% faster.
 ### Setup
 Install `svelte-intl-precompile` as a runtime dependency.
 
-Create a folder to put your translations. I like to use a `/messages` or `/translations` folder on the root. On that folder, create `en.js`, `es.js` and as many files as languages you want. On each file, export an object with your translations:
+Create a folder to put your translations. I like to use a `/messages` or `/locales` folder on the root. On that folder, create `en.js`, `es.js` and as many files as languages you want. On each file, export an object with your translations:
 ```js
  export default {
    "recent.aria": "Find recently viewed tides",
@@ -88,7 +88,7 @@ module.exports = {
 				noExternal: Object.keys(pkg.dependencies || {})
 			},
 			plugins: [
-				precompileIntl('locales')
+				precompileIntl('locales') // if your translations are defined in /locales/[lang].js
 			]			
 		}
 	}
