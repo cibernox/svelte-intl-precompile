@@ -101,7 +101,7 @@ Now you need some initialization code to register your locales and configure you
 
 ```html
 <script context="module">
-	import { addMessages, init /*, register */ } from 'svelte-intl-precompile';
+	import { addMessages, init, getLocaleFromNavigator /*, register */ } from 'svelte-intl-precompile';
 	import en from '../../locales/en.js';
 	// @ts-ignore
 	addMessages('en', en);
@@ -109,7 +109,7 @@ Now you need some initialization code to register your locales and configure you
 
 	init({
 		fallbackLocale: 'en',
-		initialLocale: { navigator: true }
+		initialLocale: getLocaleFromNavigator()
 	});
 </script>
 
