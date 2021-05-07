@@ -64,12 +64,12 @@ Install `svelte-intl-precompile` as a runtime dependency.
 
 Create a folder to put your translations. I like to use a `/messages` or `/locales` folder on the root. On that folder, create `en.js`, `es.js` and as many files as languages you want. On each file, export an object with your translations:
 ```js
- export default {
-   "recent.aria": "Find recently viewed tides",
-   "menu": "Menu",
-   "foot": "{count} {count, plural, =1 {foot} other {feet}}",
- }
- ```
+export default {
+  "recent.aria": "Find recently viewed tides",
+  "menu": "Menu",
+  "foot": "{count} {count, plural, =1 {foot} other {feet}}",
+}
+```
 
 In your `svelte.config.js` import the function exported by `svelte-intl-precompile/sveltekit-plugin.js` and invoke with the folder where you've placed
 your translation files it to your list of Vite plugins:
@@ -78,14 +78,14 @@ import precompileIntl from "svelte-intl-precompile/sveltekit-plugin.js";
 
 /** @type {import('@sveltejs/kit').Config} */
 module.exports = {
-	kit: {
-		target: '#svelte',
-		vite: {
-			plugins: [
-				precompileIntl('locales') // if your translations are defined in /locales/[lang].js
-			]			
-		}
-	}
+  kit: {
+    target: '#svelte',
+    vite: {
+      plugins: [
+        precompileIntl('locales') // if your translations are defined in /locales/[lang].js
+      ]			
+    }
+  }
 };
 ```
 
@@ -97,20 +97,20 @@ Now you need some initialization code to register your locales and configure you
 
 ```html
 <script context="module">
-	import { addMessages, init, getLocaleFromNavigator /*, register */ } from 'svelte-intl-precompile';
-	import en from '../../locales/en.js';
-	// @ts-ignore
-	addMessages('en', en);
-	// register('es', () => import('../../locales/en.js')); <-- use this approach if you want locales to be load lazily
+  import { addMessages, init, getLocaleFromNavigator /*, register */ } from 'svelte-intl-precompile';
+  import en from '../../locales/en.js';
+  // @ts-ignore
+  addMessages('en', en);
+  // register('es', () => import('../../locales/en.js')); <-- use this approach if you want locales to be load lazily
 
-	init({
-		fallbackLocale: 'en',
-		initialLocale: getLocaleFromNavigator()
-	});
+  init({
+    fallbackLocale: 'en',
+    initialLocale: getLocaleFromNavigator()
+  });
 </script>
 
 <script>
-	import '../app.css';
+  import '../app.css';
 </script>
 
 <slot />
