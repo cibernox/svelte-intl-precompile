@@ -71,22 +71,16 @@ Create a folder to put your translations. I like to use a `/messages` or `/local
  }
  ```
 
-In your `svelte.config.cjs` import the function exported by `svelte-intl-precompile/sveltekit-plugin` and invoke with the folder where you've placed
+In your `svelte.config.js` import the function exported by `svelte-intl-precompile/sveltekit-plugin.js` and invoke with the folder where you've placed
 your translation files it to your list of Vite plugins:
 ```js
-const node = require('@sveltejs/adapter-node');
-const pkg = require('./package.json');
-const precompileIntl = require("svelte-intl-precompile/sveltekit-plugin");
+import precompileIntl from "svelte-intl-precompile/sveltekit-plugin.js";
 
 /** @type {import('@sveltejs/kit').Config} */
 module.exports = {
 	kit: {
-		adapter: node(),
 		target: '#svelte',
 		vite: {
-			ssr: {
-				noExternal: Object.keys(pkg.dependencies || {})
-			},
 			plugins: [
 				precompileIntl('locales') // if your translations are defined in /locales/[lang].js
 			]			
@@ -94,6 +88,8 @@ module.exports = {
 	}
 };
 ```
+
+If you are using CommonJS, you can instead use `const precompileIntl = require("svelte-intl-precompile/sveltekit-plugin.cjs");`.
 
 From this step onward the library almost identical to use and configure to the popular `svelte-i18n`. It has the same features and only the import path is different. You can check the docs of `svelte-i18n` for examples and details in the configuration options.
 
