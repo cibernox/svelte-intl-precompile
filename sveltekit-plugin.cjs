@@ -1,6 +1,6 @@
-import babel from '@babel/core';
-import buildPlugin from 'babel-plugin-precompile-intl';
-import path from 'path';
+const babel = require('@babel/core');
+const buildPlugin = require("babel-plugin-precompile-intl");
+const path = require('path');
 
 const intlPrecompiler = buildPlugin('svelte-intl-precompile');
 
@@ -21,4 +21,4 @@ function svelteIntlPrecompile(localesRoot) {
 
 svelteIntlPrecompile.transformCode = transformCode;
 
-export default svelteIntlPrecompile;
+module.exports = svelteIntlPrecompile;
