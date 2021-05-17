@@ -96,7 +96,7 @@ From this step onward the library almost identical to use and configure to the p
 Now you need some initialization code to register your locales and configure your preferences. You can import your languages statically (which will add them to your bundle) or register loaders that will load the translations lazily. The best place to put this configuration is inside a `<script type="module">` on your `src/$layout.svelte`
 
 ```html
-<script context="module">
+<script>
   import { addMessages, init, getLocaleFromNavigator /*, register */ } from 'svelte-intl-precompile';
   import en from '../../locales/en.js';
   // @ts-ignore
@@ -124,4 +124,40 @@ Now on your `.svelte` files you start translating using the t store exported fro
 <footer class="l-footer">
 	<p class="t-footer">{$t("hightide")} {$t("footer.cta")}</p>
 </footer>
+```
+
+
+## Note for automatic browser locale detection when server side rendering
+
+If you want to automatically detect your user's locale from the browser using `getLocaleFromNavigator()` but you are
+server side rendering your app (which sveltekit does by default), you need to take some extra steps for the
+locale used when SSR matches the locale when hydrating the app which would cause texts to change.
+
+You can pass to `getLocaleFromNavigator` an optional argument which is the locale to use when SSR'ing your app.
+How you get that value depends on how you run your app, but for instance using sveltekit you can extract it from the
+`accept-language` HTTP header of the request, using [Hooks](https://kit.svelte.dev/docs#hooks)
+
+You can use `getSession` to extract the preferred locale from the request headers and store it in the session object,
+which is made available to the client:
+```js
+export function getSession(request) {
+  let acceptedLocale = request.headers["accept-language"].split(',')[0];
+	return { acceptedLanguage };
+}
+```
+
+Then you can use the `session` store to pass it to the `init` function:
+```js
+	import { addMessages, init, getLocaleFromNavigator } from 'svelte-intl-precompile';
+  import enUS from '../../locales/en-us.js';
+  import enGB from '../../locales/en-gb.js';
+	import { session } from '$app/stores';
+
+	addMessages('en', enUS)
+	addMessages('en-US', enUS)
+	addMessages('en-GB', enGB)
+	init({
+		fallbackLocale: 'en',
+		initialLocale: getLocaleFromNavigator($session.acceptedLanguage),
+	});
 ```
