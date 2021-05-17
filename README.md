@@ -140,6 +140,7 @@ How you get that value depends on how you run your app, but for instance using s
 You can use `getSession` to extract the preferred locale from the request headers and store it in the session object,
 which is made available to the client:
 ```js
+// src/hooks.js
 export function getSession(request) {
   let acceptedLocale = request.headers["accept-language"].split(',')[0];
 	return { acceptedLanguage };
@@ -147,17 +148,20 @@ export function getSession(request) {
 ```
 
 Then you can use the `session` store to pass it to the `init` function:
-```js
-	import { addMessages, init, getLocaleFromNavigator } from 'svelte-intl-precompile';
+```html
+<!-- __layout.svelte -->
+<script>
+  import { addMessages, init, getLocaleFromNavigator } from 'svelte-intl-precompile';
   import enUS from '../../locales/en-us.js';
   import enGB from '../../locales/en-gb.js';
-	import { session } from '$app/stores';
+  import { session } from '$app/stores';
 
-	addMessages('en', enUS)
-	addMessages('en-US', enUS)
-	addMessages('en-GB', enGB)
-	init({
-		fallbackLocale: 'en',
-		initialLocale: getLocaleFromNavigator($session.acceptedLanguage),
-	});
+  addMessages('en', enUS)
+  addMessages('en-US', enUS)
+  addMessages('en-GB', enGB)
+  init({
+    fallbackLocale: 'en',
+    initialLocale: getLocaleFromNavigator($session.acceptedLanguage),
+  });
+</script>
 ```
