@@ -17,6 +17,6 @@
   "license": "ISC",
   "dependencies": {
     "babel-plugin-precompile-intl": "^0.0.11",
-    "precompile-intl-runtime": "^0.4.3"
+    "precompile-intl-runtime": "^0.4.4"
   }
 }
