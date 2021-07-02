@@ -142,8 +142,8 @@ which is made available to the client:
 ```js
 // src/hooks.js
 export function getSession(request) {
-  let acceptedLocale = request.headers["accept-language"].split(',')[0];
-	return { acceptedLanguage };
+  let acceptedLanguage = request.headers["accept-language"].split(',')[0];
+  return { acceptedLanguage };
 }
 ```
 
