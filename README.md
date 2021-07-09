@@ -60,9 +60,12 @@ When rendering a key that has also been rendered before around 25% faster. For i
 before, around 400% faster.
 
 ### Setup
-Install `svelte-intl-precompile` as a runtime dependency.
+First of all, you can find a working sveltekit app configured to use `svelte-intl-precompile` in https://github.com/cibernox/sample-app-svelte-intl-precompile.
+If you struggle with any of the following steps you can always use that app to compare it with yours:
 
-Create a folder to put your translations. I like to use a `/messages` or `/locales` folder on the root. On that folder, create `en.js`, `es.js` and as many files as languages you want. On each file, export an object with your translations:
+1. Install `svelte-intl-precompile` as a runtime dependency.
+
+2. Create a folder to put your translations. I like to use a `/messages` or `/locales` folder on the root. On that folder, create `en.js`, `es.js` and as many files as languages you want. On each file, export an object with your translations:
 ```js
 export default {
   "recent.aria": "Find recently viewed tides",
@@ -71,7 +74,7 @@ export default {
 }
 ```
 
-In your `svelte.config.js` import the function exported by `svelte-intl-precompile/sveltekit-plugin.js` and invoke with the folder where you've placed
+3. In your `svelte.config.js` import the function exported by `svelte-intl-precompile/sveltekit-plugin.js` and invoke with the folder where you've placed
 your translation files it to your list of Vite plugins:
 ```js
 import precompileIntl from "svelte-intl-precompile/sveltekit-plugin.js";
@@ -93,7 +96,7 @@ If you are using CommonJS, you can instead use `const precompileIntl = require("
 
 From this step onward the library almost identical to use and configure to the popular `svelte-i18n`. It has the same features and only the import path is different. You can check the docs of `svelte-i18n` for examples and details in the configuration options.
 
-Now you need some initialization code to register your locales and configure your preferences. You can import your languages statically (which will add them to your bundle) or register loaders that will load the translations lazily. The best place to put this configuration is inside a `<script type="module">` on your `src/$layout.svelte`
+4. Now you need some initialization code to register your locales and configure your preferences. You can import your languages statically (which will add them to your bundle) or register loaders that will load the translations lazily. The best place to put this configuration is inside a `<script type="module">` on your `src/$layout.svelte`
 
 ```html
 <script>
@@ -116,7 +119,7 @@ Now you need some initialization code to register your locales and configure you
 <slot />
 ```
 
-Now on your `.svelte` files you start translating using the t store exported from precompile-intl-runtime:
+5. Now on your `.svelte` files you start translating using the t store exported from precompile-intl-runtime:
 ```html
 <script>
 	import { t } from 'svelte-intl-precompile'
