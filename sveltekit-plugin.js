@@ -23,7 +23,8 @@ function svelteIntlPrecompile(localesRoot, prefix = '$locales') {
 
 			watcher.on('change', async(file) => {
 				if(file.includes(resolvedPath)){
-					const module = moduleGraph.getModuleById(`${prefix}/${detectLanguageCode(file)}.ts`);
+					const name = `${prefix}/${detectLanguageCode(file)}`
+					const module = moduleGraph.getModuleById(`${name}.ts`) || moduleGraph.getModuleById(`${name}.js`);
 					if (module) {
 						moduleGraph.invalidateModule(module);
 					}
