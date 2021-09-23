@@ -1,3 +1,5 @@
+## 0.3.4
+- Reexport type definitions so typescript detects types properly.
 ## 0.3.2
 - Bump `babel-plugin-precompile-intl` to fix bug when ICU string start with an expression but end with something else.
 ## 0.3.1
