@@ -86,8 +86,8 @@ module.exports = {
     vite: {
       plugins: [
         // if your translations are defined in /locales/[lang].js
-        // also you can change prefix for json files ($locales by default)
-        precompileIntl('locales', '$myprefix')
+        precompileIntl('locales')
+        // precompileIntl('locales', '$myprefix') // also you can change import path prefix for json files ($locales by default)
       ]
     }
   }
@@ -102,13 +102,12 @@ From this step onward the library almost identical to use and configure to the p
 ```html
 <script>
   import { addMessages, init, getLocaleFromNavigator /*, register */ } from 'svelte-intl-precompile';
-  import en from '../../locales/en.js';
-  // load /locales/es.json if prefix set to '$myprefix'
-  import es from '$myprefix/es.js' // or $myprefix/es.ts for typescript projects
+  import en from '$locales/en.js';  // If using typescript you can also use the .ts extension.
+  import es from '$locales/es.js'   // load from $myprefix/es.js you configured a custom import path.
   // @ts-ignore
   addMessages('en', en);
   addMessages('es', es);
-  // register('es', () => import('../../locales/en.js')); <-- use this approach if you want locales to be load lazily
+  // register('es', () => import('$locales/es.js')); <-- use this approach if you want locales to be load lazily
 
   init({
     fallbackLocale: 'en',
@@ -159,8 +158,8 @@ Then you can use the `session` store to pass it to the `init` function:
 <!-- __layout.svelte -->
 <script>
   import { addMessages, init, getLocaleFromNavigator } from 'svelte-intl-precompile';
-  import enUS from '../../locales/en-us.js';
-  import enGB from '../../locales/en-gb.js';
+  import enUS from '$locales/en-us.js';
+  import enGB from '$locales/en-gb.js';
   import { session } from '$app/stores';
 
   addMessages('en', enUS)
