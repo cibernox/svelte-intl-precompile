@@ -1,3 +1,7 @@
+## 0.4.0
+- [FEATURE] Supports defining translations in plain json files. This makes much easier to integrate this library with i18n flows like Lokalise. In reality this 
+  has always the goal and having to define translations in JS/TS files was just a workaround while figuring out how it works.
+  Now if your translations are defined in `/locales/en.json` you can import it from `$locales/en.js` and svelte will know what to do.
 ## 0.3.4
 - Reexport type definitions so typescript detects types properly.
 ## 0.3.2
