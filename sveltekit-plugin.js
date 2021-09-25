@@ -20,14 +20,17 @@ function svelteIntlPrecompile(localesRoot, prefix = '$locales') {
 		name: 'svelte-intl-precompile', // required, will show up in warnings and errors
 		configureServer(server) {
 			const { ws, watcher, moduleGraph } = server
-
+			// listen to vite files watcher
 			watcher.on('change', async(file) => {
+				// check if file changed is a locale
 				if(file.includes(resolvedPath)){
 					const name = `${prefix}/${detectLanguageCode(file)}`
+					// check if locale file is in vite cache
 					const module = moduleGraph.getModuleById(`${name}.ts`) || moduleGraph.getModuleById(`${name}.js`);
 					if (module) {
 						moduleGraph.invalidateModule(module);
 					}
+					// trigger hmr
 					ws.send({ type: 'full-reload', path: '*' })
 				}
 			})
