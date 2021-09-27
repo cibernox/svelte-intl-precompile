@@ -29,7 +29,7 @@ The babel plugin will analyze and understand the strings in the ICU message synt
 import { __interpolate, __number, __plural, __select, __time } from "precompile-intl-runtime";
 export default {
   plain: "Some text without interpolations",
-  interpolated: `A text where I interpolate ${__interpolate(count)} times`,
+  interpolated: count => `A text where I interpolate ${__interpolate(count)} times`,
   time: now => `Now is ${__time(now)}`,
   number: n => `My favorite number is ${__number(n)}`,
   pluralized: count => `I have ${__plural(count, { 0: "no cats", 1: "one cat", h: `${__interpolate(count)} cats`})}`,
