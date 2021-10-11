@@ -98,7 +98,7 @@ If you are using CommonJS, you can instead use `const precompileIntl = require("
 
 From this step onward the library almost identical to use and configure to the popular `svelte-i18n`. It has the same features and only the import path is different. You can check the docs of `svelte-i18n` for examples and details in the configuration options.
 
-4. Now you need some initialization code to register your locales and configure your preferences. You can import your languages statically (which will add them to your bundle) or register loaders that will load the translations lazily. The best place to put this configuration is inside a `<script type="module">` on your `src/$layout.svelte`
+4. Now you need some initialization code to register your locales and configure your preferences. You can import your languages statically (which will add them to your bundle) or register loaders that will load the translations lazily. The best place to put this configuration is inside a `<script context="module">` on your `src/$layout.svelte`
 ```html
 <script>
   import { addMessages, init, getLocaleFromNavigator /*, register */ } from 'svelte-intl-precompile';
