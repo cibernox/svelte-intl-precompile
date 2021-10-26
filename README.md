@@ -65,9 +65,9 @@ If you struggle with any of the following steps you can always use that app to c
 
 1. Install `svelte-intl-precompile` as a runtime dependency.
 
-2. Create a folder to put your translations. I like to use a `/messages` or `/locales` folder on the root. On that folder, create `en.js`, `es.js` and as many files as languages you want. On each file, export an object with your translations:
-```js
-export default {
+2. Create a folder to put your translations. I like to use a `/messages` or `/locales` folder on the root. On that folder, create `en.json`, `es.json` (you can also create JS files exporting objects with the translations) and as many files as languages you want. On each file, export an object with your translations:
+```json
+{
   "recent.aria": "Find recently viewed tides",
   "menu": "Menu",
   "foot": "{count} {count, plural, =1 {foot} other {feet}}",
@@ -104,6 +104,7 @@ From this step onward the library almost identical to use and configure to the p
   import { addMessages, init, getLocaleFromNavigator /*, register */ } from 'svelte-intl-precompile';
   import en from '$locales/en.js';  // If using typescript you can also use the .ts extension.
   import es from '$locales/es.js'   // load from $myprefix/es.js you configured a custom import path.
+  // if you put your translations in js files, import then usin the relative path. E.g. `import en from '../../locales/en.js'`
   // @ts-ignore
   addMessages('en', en);
   addMessages('es', es);
