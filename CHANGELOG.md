@@ -1,4 +1,4 @@
-## 0.4.1
+## 0.4.2
 - Export internal `transformCode(str)` function to create interactive playground.
 ## 0.4.0
 - [FEATURE] Supports defining translations in plain json files. This makes much easier to integrate this library with i18n flows like Lokalise. In reality this 
