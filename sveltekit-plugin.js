@@ -9,7 +9,7 @@ function detectLanguageCode (filepath) {
 	return path.basename(filepath).split('.')[0]
 }
 
-function transformCode(code) {
+export function transformCode(code) {
 	return babel.transform(code, { plugins: [intlPrecompiler] }).code;
 }
 
