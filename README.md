@@ -157,18 +157,19 @@ export function getSession(request) {
 Then you can use the `session` store to pass it to the `init` function:
 ```html
 <!-- __layout.svelte -->
-<script>
-  import { addMessages, init, getLocaleFromNavigator } from 'svelte-intl-precompile';
-  import enUS from '$locales/en-us.js';
-  import enGB from '$locales/en-gb.js';
-  import { session } from '$app/stores';
-
-  addMessages('en', enUS)
-  addMessages('en-US', enUS)
-  addMessages('en-GB', enGB)
-  init({
-    fallbackLocale: 'en',
-    initialLocale: getLocaleFromNavigator($session.acceptedLanguage),
-  });
+<script context="module">
+  import { register, init, waitLocale, getLocaleFromNavigator } from 'svelte-intl-precompile';
+  register('en', () => import('$locales/en-us.js'));
+  register('en-US', () => import('$locales/en-us.js'));
+  register('es-GB', () => import('$locales/es-gb.js'));	
+	
+  export async function load({session}) {
+    init({
+      fallbackLocale: 'en',
+      initialLocale: session.acceptedLanguage || getLocaleFromNavigator(),
+    });
+    await waitLocale(); // awaits for initialLocale language pack to finish loading;
+    return {};
+  }
 </script>
 ```
