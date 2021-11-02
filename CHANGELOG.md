@@ -1,3 +1,5 @@
+## 0.5.0
+- Updates the babel pluging that precompiles ICU strings. Should be backwards compatible, but it's risky enough to grant a minor version bump.
 ## 0.4.2
 - Export internal `transformCode(str)` function to create interactive playground.
 ## 0.4.0
