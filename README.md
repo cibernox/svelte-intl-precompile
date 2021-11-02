@@ -6,6 +6,12 @@ a different approach to processing translations.
 Instead of doing all the work in the client, much like Svelte.js acts as a compiler for your app, this library acts as a compiler
 for your translations.
 
+## Check the documentation page, it's better than this Readme
+
+Go to [https://svelte-intl-precompile.com](https://svelte-intl-precompile.com)
+
+Still, there you have the rest of the Readme.
+
 ### Why would I want to use it? How does it work?
 This approach is different than the taken by libraries like intl-messageformat or format-message, which do all the work in the browser. The approach taken by those libraries is more flexible as you can just load json files with translations in plain text and that's it, but it also means the library needs to ship a parser for the ICU message syntax, and it always has to have ship code for all the features that the ICU syntax supports, even features you might not use, making those libraries several times bigger.
 
