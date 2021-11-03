@@ -1,3 +1,7 @@
+## 0.6.0
+- Updates the babel plugin which in turn now depends on the new `@formatjs/icu-message-parser` package, which replaces the now 
+  unmaintained `intl-message-parser`. It is supposed to be compatible although I've identified one corner case where some previously
+  supported feature (nested plurals) are now not supported anymore. Opened https://github.com/formatjs/formatjs/issues/3250 to fix this.
 ## 0.5.0
 - Updates the babel pluging that precompiles ICU strings. Should be backwards compatible, but it's risky enough to grant a minor version bump.
 ## 0.4.2
