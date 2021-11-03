@@ -1,3 +1,5 @@
+## 0.6.1
+- [BUGFIX] Fix bug with exact plurals having two or more digits. E.g `=12 {a docen cats}`.
 ## 0.6.0
 - Updates the babel plugin which in turn now depends on the new `@formatjs/icu-message-parser` package, which replaces the now 
   unmaintained `intl-message-parser`. It is supposed to be compatible although I've identified one corner case where some previously
