@@ -1,4 +1,6 @@
-## 0.6.1
+## 0.6.2
+- [BUGFIX] Update babel pluging to fix a bug with translations that only contain a single date/time helper and no other text.
+- ## 0.6.1
 - [BUGFIX] Fix bug with exact plurals having two or more digits. E.g `=12 {a docen cats}`.
 ## 0.6.0
 - Updates the babel plugin which in turn now depends on the new `@formatjs/icu-message-parser` package, which replaces the now 
