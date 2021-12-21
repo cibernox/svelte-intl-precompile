@@ -18,6 +18,7 @@ function svelteIntlPrecompile(localesRoot, prefix = '$locales') {
 
 	return {
 		name: 'svelte-intl-precompile', // required, will show up in warnings and errors
+		enforce: 'pre',
 		configureServer(server) {
 			const { ws, watcher, moduleGraph } = server
 			// listen to vite files watcher
@@ -36,11 +37,43 @@ function svelteIntlPrecompile(localesRoot, prefix = '$locales') {
 			})
 		},
 		resolveId(id) {
-			if (id.startsWith(prefix)) {
+			if (id === prefix || id.startsWith(prefix + '/')) {
 				return id;
 			}
 		},
 		load(id) {
+			// allow to auto register locales by calling registerAll from $locales module
+			if (id === prefix) {
+				const code = [
+					`import { register } from 'svelte-intl-precompile'`,
+					`export function registerAll() {`
+				]
+
+				const availableLocales = []
+
+				// add register calls for each found locale
+				for (const file of fs.readdirSync(localesRoot)) {
+					if (path.extname(file) === '.json') {
+						const locale = path.basename(file, '.json')
+
+						availableLocales.push(locale)
+
+						code.push(
+							`	register(${JSON.stringify(locale)}, () => import(${
+								JSON.stringify(`${prefix}/${locale}.js`)
+							}))`,
+						)
+					}
+				}
+
+				code.push(
+					`}`,
+					`export const availableLocales = ${JSON.stringify(availableLocales)}`
+				)
+
+				return code.join('\n')
+			}
+
 			if (id.startsWith(prefix)) {
 				const code = fs.readFileSync(path.join(localesRoot, `${detectLanguageCode(id)}.json`), {
 					encoding: 'utf-8'

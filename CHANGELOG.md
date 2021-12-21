@@ -1,3 +1,5 @@
+## 0.7.0
+- [FEATURE] expose the `prefix` (default: `$locales`) as a module that allows to register (`registerAll()`) and access (`availableLocales`) all available translations.
 ## 0.6.2
 - [BUGFIX] Update babel pluging to fix a bug with translations that only contain a single date/time helper and no other text.
 - ## 0.6.1
