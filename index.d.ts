@@ -1,9 +1,9 @@
 export * from 'precompile-intl-runtime';
 
 declare module '$locales' {
-  export * from 'precompile-intl-runtime'
+  /** Registers all locales found in `localesRoot`. */
+  export const registerAll: () => void
 
-  const availableLocales: string[]
-
-  export default availableLocales
+  /** A list of all locales that will be registered by {@link registerAll()}. */
+  export const availableLocales: string[]
 }

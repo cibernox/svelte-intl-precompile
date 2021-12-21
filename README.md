@@ -179,3 +179,25 @@ Then you can use the `session` store to pass it to the `init` function:
   }
 </script>
 ```
+
+If you have a lot of languages or want to register all available languages, you can use the `registerAll` function:
+
+```html
+<!-- __layout.svelte -->
+<script context="module">
+  import { register, init, waitLocale, getLocaleFromNavigator } from 'svelte-intl-precompile';
+  import { registerAll } from '$locales';
+
+  // Equivalent to a `register("lang", () => import('$locales/lang.js'))` fro each json lang file in localesRoot.
+  registerAll();
+
+  export async function load({session}) {
+    init({
+      fallbackLocale: 'en',
+      initialLocale: session.acceptedLanguage || getLocaleFromNavigator(),
+    });
+    await waitLocale(); // awaits for initialLocale language pack to finish loading;
+    return {};
+  }
+</script>
+```

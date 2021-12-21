@@ -42,32 +42,34 @@ function svelteIntlPrecompile(localesRoot, prefix = '$locales') {
 			}
 		},
 		load(id) {
-			// auto register locales by importing $locale module
+			// allow to auto register locales by calling registerAll from $locales module
 			if (id === prefix) {
 				const code = [
-					`import { get } from 'svelte/store'`,
-					`import { register, locales } from 'precompile-intl-runtime'`,
-					// act as an alias for all helper functions
-					// import { t } from '$locales'
-					`export * from 'precompile-intl-runtime'`
+					`import { register } from 'precompile-intl-runtime'`,
+					`export function registerAll() {`
 				]
+
+				const availableLocales = []
 
 				// add register calls for each found locale
 				for (const file of fs.readdirSync(localesRoot)) {
 					if (path.extname(file) === '.json') {
 						const locale = path.basename(file, '.json')
 
+						availableLocales.push(locale)
+
 						code.push(
-							`register(${JSON.stringify(locale)}, () => import(${
+							`	register(${JSON.stringify(locale)}, () => import(${
 								JSON.stringify(`${prefix}/${locale}.js`)
 							}))`,
 						)
 					}
 				}
 
-				// the default export can be used to get a list of all registered locales
-				// import registeredLocales from '$locales'
-				code.push(`export default /* @__PURE__ */ get(locales)`)
+				code.push(
+					`}`,
+					`export const availableLocales = ${JSON.stringify(availableLocales)}`
+				)
 
 				return code.join('\n')
 			}
