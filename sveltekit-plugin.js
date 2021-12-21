@@ -45,7 +45,7 @@ function svelteIntlPrecompile(localesRoot, prefix = '$locales') {
 			// allow to auto register locales by calling registerAll from $locales module
 			if (id === prefix) {
 				const code = [
-					`import { register } from 'precompile-intl-runtime'`,
+					`import { register } from 'svelte-intl-precompile'`,
 					`export function registerAll() {`
 				]
 
