@@ -80,10 +80,10 @@ If you struggle with any of the following steps you can always use that app to c
 }
 ```
 
-3. In your `svelte.config.js` import the function exported by `svelte-intl-precompile/sveltekit-plugin.js` and invoke with the folder where you've placed
+3. In your `svelte.config.js` import the function exported by `svelte-intl-precompile/sveltekit-plugin` and invoke with the folder where you've placed
 your translation files it to your list of Vite plugins:
 ```js
-import precompileIntl from "svelte-intl-precompile/sveltekit-plugin.js";
+import precompileIntl from "svelte-intl-precompile/sveltekit-plugin";
 
 /** @type {import('@sveltejs/kit').Config} */
 module.exports = {
@@ -100,7 +100,7 @@ module.exports = {
 };
 ```
 
-If you are using CommonJS, you can instead use `const precompileIntl = require("svelte-intl-precompile/sveltekit-plugin.cjs");`.
+If you are using CommonJS, you can instead use `const precompileIntl = require("svelte-intl-precompile/sveltekit-plugin");`.
 
 From this step onward the library almost identical to use and configure to the popular `svelte-i18n`. It has the same features and only the import path is different. You can check the docs of `svelte-i18n` for examples and details in the configuration options.
 
@@ -129,7 +129,7 @@ From this step onward the library almost identical to use and configure to the p
 <slot />
 ```
 
-5. Now on your `.svelte` files you start translating using the t store exported from precompile-intl-runtime:
+5. Now on your `.svelte` files you start translating using the `t` store exported from `svelte-intl-precompile`:
 ```html
 <script>
 	import { t } from 'svelte-intl-precompile'
@@ -165,9 +165,9 @@ Then you can use the `session` store to pass it to the `init` function:
 <!-- __layout.svelte -->
 <script context="module">
   import { register, init, waitLocale, getLocaleFromNavigator } from 'svelte-intl-precompile';
-  register('en', () => import('$locales/en-us.js'));
-  register('en-US', () => import('$locales/en-us.js'));
-  register('es-GB', () => import('$locales/es-gb.js'));	
+  register('en', () => import('$locales/en-us'));
+  register('en-US', () => import('$locales/en-US'));
+  register('es-GB', () => import('$locales/es-GB'));	
 	
   export async function load({session}) {
     init({
@@ -188,7 +188,7 @@ If you have a lot of languages or want to register all available languages, you 
   import { register, init, waitLocale, getLocaleFromNavigator } from 'svelte-intl-precompile';
   import { registerAll } from '$locales';
 
-  // Equivalent to a `register("lang", () => import('$locales/lang.js'))` fro each json lang file in localesRoot.
+  // Equivalent to a `register("lang", () => import('$locales/lang'))` fro each lang file in localesRoot.
   registerAll();
 
   export async function load({session}) {

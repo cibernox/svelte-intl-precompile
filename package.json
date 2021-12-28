@@ -4,12 +4,27 @@
   "description": "I18n library for Svelte.js that analyzes your keys at build time for max performance and minimal footprint",
   "main": "index.js",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.cjs"
+    },
+    "./sveltekit-plugin": {
+      "import": "./sveltekit-plugin.js",
+      "require": "./sveltekit-plugin.cjs"
+    },
+    "./sveltekit-plugin.js": "./sveltekit-plugin.js",
+    "./sveltekit-plugin.cjs": "./sveltekit-plugin.cjs",
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/cibernox/svelte-intl-precompile"
   },
   "scripts": {
-    "test": "jest test"
+    "build": "ascjs --no-default ./sveltekit-plugin.js ./sveltekit-plugin.cjs",
+    "prepublish": "npm run build"
   },
   "keywords": [
     "svelte",
@@ -21,6 +36,13 @@
   "license": "ISC",
   "dependencies": {
     "babel-plugin-precompile-intl": "^0.2.2",
-    "precompile-intl-runtime": "^0.4.12"
+    "js-yaml": "^4.1.0",
+    "json5": "^2.2.0",
+    "path-starts-with": "^2.0.0",
+    "precompile-intl-runtime": "^0.4.12",
+    "strip-bom": "^5.0.0"
+  },
+  "devDependencies": {
+    "ascjs": "^5.0.1"
   }
 }
