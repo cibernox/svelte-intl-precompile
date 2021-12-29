@@ -1,3 +1,16 @@
+## 0.8.0
+- [FEATURE] Support all i18n-ally file formats for locales – json5 (`.json5` and `.json`) and yaml (`.yaml` and `.yml`)
+- [FEATURE] Support locales to be defined within `.js`, `.ts`, and `.mjs` files
+- [FEATURE] Allow configuring new transformers based on file extension
+- [FEATURE] Support loading of locales without an extension (`$locales/en` instead of `$locales/en.js`)
+- [FEATURE] Sort `availableLocales` export of `$locales` module that more specific locales come first `en-US` comes before `en`
+- [FEATURE] Add `filename` to babel transform for better debugging
+- [FEATURE] Add typescript definitions for `svelte-intl-precompile/sveltekit-plugin`
+- [FEATURE] Add `exports` field to `package.json` with legacy `./sveltekit-plugin.js` and `./sveltekit-plugin.cjs` exports
+- [BUGFIX] Invalidate `$locales` module in HMR mode if a file within the locales directory has changed
+- [BUGFIX] Normalize paths when determining if a file is within the locales directory
+- [BUGFIX] Add `index.cjs` to re-export `precompile-intl-runtime` for cjs compat loading
+- [BUILD] Autogenerate `./sveltekit-plugin.cjs` from `./sveltekit-plugin.js` during publishing
 ## 0.7.0
 - [FEATURE] expose the `prefix` (default: `$locales`) as a module that allows to register (`registerAll()`) and access (`availableLocales`) all available translations.
 ## 0.6.2
