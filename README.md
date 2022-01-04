@@ -1,3 +1,5 @@
+![Svelte Intl Precompile](https://raw.githubusercontent.com/cibernox/svelte-intl-precompile/main/logos/svelte-intl-precompile-double-line.svg)
+
 ## Svelte-intl-precompile
 
 This i18n library for Svelte.js has an API identical (or at least very similar) to https://github.com/kaisermann/svelte-i18n but has
