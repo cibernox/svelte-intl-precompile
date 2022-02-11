@@ -147,6 +147,7 @@ function svelteIntlPrecompile(localesRoot, prefixOrOptions) {
 			const { ws, watcher, moduleGraph } = server;
 			// listen to vite files watcher
 			watcher.on('change', (file) => {
+				file = path.relative('', file);
 				// check if file changed is a locale
 				if (pathStartsWith(file, localesRoot)) {
 					// invalidate $locales/<locales><extname> modules
