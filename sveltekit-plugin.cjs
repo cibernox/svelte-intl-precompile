@@ -1,15 +1,17 @@
-import * as path from 'path';
-import * as fs from 'fs/promises';
+'use strict';
+const path = require('path');
+const fs = require('fs/promises');
 
-import * as babel from '@babel/core';
-import { buildICUPlugin } from 'babel-plugin-precompile-intl';
-import pathStartsWith from 'path-starts-with'
+const babel = require('@babel/core');
+const { buildICUPlugin } = require('babel-plugin-precompile-intl');
+const pathStartsWith = (m => /* c8 ignore start */ m.__esModule ? m.default : m /* c8 ignore stop */)(require('path-starts-with'))
 
 const intlPrecompiler = buildICUPlugin('svelte-intl-precompile');
 
-export function transformCode(code, options) {
+function transformCode(code, options) {
 	return babel.transform(code, { ...options, plugins: [intlPrecompiler] }).code;
 }
+exports.transformCode = transformCode
 
 const transformScript = (content) => content
 
@@ -229,4 +231,4 @@ function svelteIntlPrecompile(localesRoot, prefixOrOptions) {
 
 svelteIntlPrecompile.transformCode = transformCode;
 
-export default svelteIntlPrecompile;
+module.exports = svelteIntlPrecompile;
