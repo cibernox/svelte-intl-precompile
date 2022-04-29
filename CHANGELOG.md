@@ -1,3 +1,5 @@
+## 0.9.1
+- [BUGFIX] Ensure the formatters work when the app is compiled with the immutable flag on and the locale changes
 ## 0.8.0
 - [FEATURE] Support all i18n-ally file formats for locales – json5 (`.json5` and `.json`) and yaml (`.yaml` and `.yml`)
 - [FEATURE] Support locales to be defined within `.js`, `.ts`, and `.mjs` files
