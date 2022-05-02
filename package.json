@@ -1,6 +1,6 @@
 {
   "name": "svelte-intl-precompile",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "I18n library for Svelte.js that analyzes your keys at build time for max performance and minimal footprint",
   "type": "module",
   "main": "index.cjs",
@@ -46,7 +46,7 @@
     "js-yaml": "^4.1.0",
     "json5": "^2.2.0",
     "path-starts-with": "^2.0.0",
-    "precompile-intl-runtime": "^0.5.0",
+    "precompile-intl-runtime": "^0.5.1",
     "strip-bom": "^5.0.0"
   },
   "devDependencies": {

@@ -1,3 +1,5 @@
+## 0.9.2
+- Make 0.9.1 actually work.
 ## 0.9.1
 - [BUGFIX] Ensure the formatters work when the app is compiled with the immutable flag on and the locale changes
 ## 0.8.0
