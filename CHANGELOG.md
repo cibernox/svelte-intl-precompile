@@ -1,3 +1,5 @@
+## 0.10.0-beta.0
+- Support number skeletons (beta)
 ## 0.9.2
 - Make 0.9.1 actually work.
 ## 0.9.1
