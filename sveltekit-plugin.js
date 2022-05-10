@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as fs from 'fs/promises';
 
 import * as babel from '@babel/core';
-import { buildICUPlugin } from 'babel-plugin-precompile-intl';
+import buildICUPlugin from 'babel-plugin-precompile-intl';
 import pathStartsWith from 'path-starts-with'
 
 const intlPrecompiler = buildICUPlugin('svelte-intl-precompile');

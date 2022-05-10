@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs/promises');
 
 const babel = require('@babel/core');
-const { buildICUPlugin } = require('babel-plugin-precompile-intl');
+const buildICUPlugin = (m => /* c8 ignore start */ m.__esModule ? m.default : m /* c8 ignore stop */)(require('babel-plugin-precompile-intl'));
 const pathStartsWith = (m => /* c8 ignore start */ m.__esModule ? m.default : m /* c8 ignore stop */)(require('path-starts-with'))
 
 const intlPrecompiler = buildICUPlugin('svelte-intl-precompile');
