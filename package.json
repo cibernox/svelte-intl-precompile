@@ -42,7 +42,7 @@
   "author": "Miguel Camba",
   "license": "ISC",
   "dependencies": {
-    "babel-plugin-precompile-intl": "^0.4.0-beta.1",
+    "babel-plugin-precompile-intl": "^0.4.0-beta.2",
     "js-yaml": "^4.1.0",
     "json5": "^2.2.0",
     "path-starts-with": "^2.0.0",
