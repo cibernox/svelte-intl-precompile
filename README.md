@@ -29,6 +29,8 @@ For instance if an app has the following set of translations:
   "pluralized": "I have {count, plural,=0 {no cats} =1 {one cat} other {{count} cats}}",
   "pluralized-with-hash": "I have {count, plural, zero {no cats} one {just # cat} other {# cats}}",
   "selected": "{gender, select, male {He is a good boy} female {She is a good girl} other {They are good fellas}}",
+  "numberSkeleton": "Your account balance is {n, number, ::currency/CAD sign-always}",
+  "installProgress": "{progress, number, ::percent scale/100 .##} completed"
 }
 ```
 
@@ -42,7 +44,9 @@ export default {
   number: n => `My favorite number is ${__number(n)}`,
   pluralized: count => `I have ${__plural(count, { 0: "no cats", 1: "one cat", h: `${__interpolate(count)} cats`})}`,
   "pluralized-with-hash": count => `I have ${__plural(count, { z: "no cats", o: `just ${count} cat`, h: `${count} cats`})}`,
-  selected: gender => __select(gender, { male: "He is a good boy", female: "She is a good girl", other: "They are good fellas"})
+  selected: gender => __select(gender, { male: "He is a good boy", female: "She is a good girl", other: "They are good fellas"}),
+  numberSkeleton: n => `Your account balance is ${__number(n, { style: 'currency', currency: 'CAD', signDisplay: 'always' })}`,
+  installProgress: progress => `${__number(progress / 100, { style: 'percent', maximumFractionDigits: 2 })} completed`
 }
 ```
 
