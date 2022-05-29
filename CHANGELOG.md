@@ -1,3 +1,5 @@
+## 0.10.1
+- Ignore any file in the locales folder which name (excluding the extension) does not match ISO locale names. E.g. `en` or `en-US` (Although not technically correct, `en-us` is also accepted)
 ## 0.10.0
 - Support template literals when translations are defined in javascript files.
 ## 0.10.0-beta.1
