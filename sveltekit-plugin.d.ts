@@ -5,6 +5,7 @@ type Transformer = (
 
 interface Options {
   prefix?: string
+  exclude?: RegExp | ((filename: string) => boolean)
   transformers?: Record<string, Transformer>
 }
 

@@ -23,8 +23,6 @@ const transformYaml = async (content, { filename }) => {
 	return `export default ${JSON.stringify(load(content, { filename }))}`;
 }
 
-const languageFileRegex = /^[[a-z]{2}(-[a-zA-Z]{2})?\.([a-z]+)$/;
-
 const stdTransformers = {
 	// order matters as it defines which extensions are tried first
 	// when looking for a matching file for a locale
@@ -61,8 +59,8 @@ function svelteIntlPrecompile(localesRoot, prefixOrOptions) {
 
 		const availableLocales = [];
 		const filesInLocalesFolder = await fs.readdir(localesRoot)
-		// Only files named after standard language codes (e.g `en.json` or `en-US.json`) are valid.s
-		const languageFiles = filesInLocalesFolder.filter(name => languageFileRegex.test(name));
+		const excludeFn = typeof exclude === 'function' ? exclude : (exclude instanceof RegExp ? (s) => exclude.test(s) : () => false);
+		const languageFiles = filesInLocalesFolder.filter(name => !excludeFn(name));
 
 		// add register calls for each found locale
 		for (const file of languageFiles) {
