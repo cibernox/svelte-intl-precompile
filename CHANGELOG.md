@@ -1,3 +1,11 @@
+## 0.11.0-beta.2
+- Add a funcionality to exclude certain files in the locales folder from being processed. That `exclude` property
+  can be either a regular expression or a function that takes the file name and returns a boolean. This features
+  replaces the reverted feature from beta.1
+- Revert change that made that only languages matching `xx` or `xx-XX` are processed. Turns out that detecting
+  what is a valid language name is more complex than that. 
+## 0.11.0-beta.1
+- Ensure that only the files in the locales folder that match a language name (`xx` or `xx-XX`) are processed.
 ## 0.10.1
 - Ignore any file in the locales folder which name (excluding the extension) does not match ISO locale names. E.g. `en` or `en-US` (Although not technically correct, `en-us` is also accepted)
 ## 0.10.0
