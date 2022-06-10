@@ -1,3 +1,5 @@
+## 0.11.0
+- Update precompile-intl-runtime, which contains improvements in the algorithm that chooses the best locale from the locale HTTP header of a request.
 ## 0.11.0-beta.2
 - Add a funcionality to exclude certain files in the locales folder from being processed. That `exclude` property
   can be either a regular expression or a function that takes the file name and returns a boolean. This features
