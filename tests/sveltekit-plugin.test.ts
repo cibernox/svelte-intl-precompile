@@ -1,30 +1,55 @@
-import { beforeEach, describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import svelteIntlPrecompile from '../sveltekit-plugin';
 
-vi.mock('path', () => ({
-  resolve(path) {
-    return 'fakeroot/' + path;
-  },
-  extname(filename) {
-    return '.' + filename.split('.')[1];
-  },
-  basename(filename) {
-    return filename.split('.')[0];
-  },
-}));
+const enJsonTranslations = singleLineString`
+{
+  "simple": "Simple string",
+  "interpolated": "String with one {value} interpolated"
+}`;
+const esJsonTranslations = singleLineString`
+{
+  "simple": "Cadena simple",
+  "interpolated": "Cadena con un {value} interpolado"
+}`;
+const translationFiles = {
+  'fakeroot/locales/en.json': enJsonTranslations,
+  'fakeroot/locales/es.json': esJsonTranslations
+}
 
-vi.mock('fs/promises', () => ({
-  readdir() {
-    return Promise.resolve().then(() => ['en-US.json', 'en.json', 'es.json'])
-  },
-}));
+beforeEach(() => {
+  vi.mock('path', () => ({
+    resolve(...paths) {
+      return ['fakeroot', ...paths].join('/');
+    },
+    extname(filename) {
+      const ext = filename.split('.')[1];
+      return ext && ('.' + ext);
+    },
+    basename(filename) {
+      return filename.split('.')[0];
+    },
+  }));
+  
+  vi.mock('fs/promises', () => ({
+    readdir() {
+      return Promise.resolve().then(() => ['en-US.json', 'en.json', 'es.json'])
+    },
+    readFile(filename) {
+      const content = translationFiles[filename];
+      if (content) return content;
+      let error = new Error('File not found');
+      (error as any).code = 'ENOENT';
+      throw error;
+    }
+  }));
+});
+
+afterEach(() => {
+  vi.clearAllMocks()
+})
 
 describe('imports', () => {
-  // beforeEach(() => {
-
-  // });
-
-  it('$locales returns a module that is aware of all the available locales', async () => { 
+  it('`$locales` returns a module that is aware of all the available locales', async () => { 
     const plugin = svelteIntlPrecompile('locales');
     const content = await plugin.load('$locales');
     expect(content).toBe(singleLineString`
@@ -35,6 +60,19 @@ describe('imports', () => {
       register("es", () => import("$locales/es"))
     }
     export const availableLocales = ["en","es","en-US"]`)
+  });
+
+  it('`$locales/en` returns the translations for that language', async () => { 
+    const plugin = svelteIntlPrecompile('locales');
+    const content = await plugin.load('$locales/en');
+    expect(content).toBe(singleLineString`
+      import { __interpolate } from "svelte-intl-precompile";
+      export default {
+        "simple": "Simple string",
+        "interpolated": value => \`String with one \${__interpolate(value)} interpolated\`
+      };`
+    );
+
   });
 });
 
