@@ -44,6 +44,7 @@ function svelteIntlPrecompile(localesRoot, prefixOrOptions) {
 	const {
 		prefix = '$locales',
 		transformers: customTransformers,
+		exclude,
 	} = typeof prefixOrOptions === 'string'
 		? { prefix: prefixOrOptions }
 		: { ...prefixOrOptions };
