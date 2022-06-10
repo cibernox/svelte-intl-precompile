@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { beforeEach, describe, it, expect, vi } from 'vitest'
 import svelteIntlPrecompile from '../sveltekit-plugin';
 
 vi.mock('path', () => ({
@@ -6,8 +6,11 @@ vi.mock('path', () => ({
     return 'fakeroot/' + path;
   },
   extname(filename) {
-    return filename.split('.')[1];
-  }
+    return '.' + filename.split('.')[1];
+  },
+  basename(filename) {
+    return filename.split('.')[0];
+  },
 }));
 
 vi.mock('fs/promises', () => ({
@@ -17,14 +20,21 @@ vi.mock('fs/promises', () => ({
 }));
 
 describe('imports', () => {
-  it('$locales returns a module with all the available locales', async () => { 
+  // beforeEach(() => {
+
+  // });
+
+  it('$locales returns a module that is aware of all the available locales', async () => { 
     const plugin = svelteIntlPrecompile('locales');
     const content = await plugin.load('$locales');
     expect(content).toBe(singleLineString`
     import { register } from 'svelte-intl-precompile'
     export function registerAll() {
+      register("en-US", () => import("$locales/en-US"))
+      register("en", () => import("$locales/en"))
+      register("es", () => import("$locales/es"))
     }
-    export const availableLocales = []`)
+    export const availableLocales = ["en","es","en-US"]`)
   });
 });
 

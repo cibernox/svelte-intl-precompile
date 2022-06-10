@@ -79,7 +79,7 @@ function svelteIntlPrecompile(localesRoot, prefixOrOptions) {
 					availableLocales.push(locale);
 	
 					code.push(
-						`	register(${JSON.stringify(locale)}, () => import(${
+						`  register(${JSON.stringify(locale)}, () => import(${
 							JSON.stringify(`${prefix}/${locale}`)
 						}))`,
 					)
