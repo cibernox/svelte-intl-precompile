@@ -43,7 +43,6 @@ const stdTransformers = {
 function svelteIntlPrecompile(localesRoot, prefixOrOptions) {
 	const {
 		prefix = '$locales',
-		exclude,
 		transformers: customTransformers,
 	} = typeof prefixOrOptions === 'string'
 		? { prefix: prefixOrOptions }
@@ -61,7 +60,7 @@ function svelteIntlPrecompile(localesRoot, prefixOrOptions) {
 		];
 
 		const availableLocales = [];
-		const filesInLocalesFolder = await fs.readdir(localesRoot);
+		const filesInLocalesFolder = await fs.readdir(localesRoot)
 		const excludeFn = typeof exclude === 'function' ? exclude : (exclude instanceof RegExp ? (s) => exclude.test(s) : () => false);
 		const languageFiles = filesInLocalesFolder.filter(name => !excludeFn(name));
 
