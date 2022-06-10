@@ -31,7 +31,9 @@
   },
   "scripts": {
     "build": "ascjs --no-default ./sveltekit-plugin.js ./sveltekit-plugin.cjs",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "keywords": [
     "svelte",
@@ -50,6 +52,7 @@
     "strip-bom": "^5.0.0"
   },
   "devDependencies": {
-    "ascjs": "^5.0.1"
+    "ascjs": "^5.0.1",
+    "vitest": "^0.14.2"
   }
 }
