@@ -11,9 +11,13 @@ const esJsonTranslations = singleLineString`
   "simple": "Cadena simple",
   "interpolated": "Cadena con un {value} interpolado"
 }`;
+const glYamlTranslations = singleLineString`
+  simple: "Cadea simple"
+  interpolated: "Cadea con un {value} interpolado"`;
 const translationFiles = {
   'fakeroot/locales/en.json': enJsonTranslations,
-  'fakeroot/locales/es.json': esJsonTranslations
+  'fakeroot/locales/es.json': esJsonTranslations,
+  'fakeroot/locales/gl.yaml': glYamlTranslations,
 }
 
 beforeEach(() => {
@@ -85,7 +89,18 @@ describe('imports', () => {
         "interpolated": value => \`Cadena con un \${__interpolate(value)} interpolado\`
       };`
     );
+  });
 
+  it('supports yaml files', async () => { 
+    const plugin = svelteIntlPrecompile('locales');
+    const content = await plugin.load('$locales/gl');
+    expect(content).toBe(singleLineString`
+      import { __interpolate } from "svelte-intl-precompile";
+      export default {
+        "simple": "Cadea simple",
+        "interpolated": value => \`Cadea con un \${__interpolate(value)} interpolado\`
+      };`
+    );
   });
 });
 
