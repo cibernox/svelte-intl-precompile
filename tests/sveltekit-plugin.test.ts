@@ -74,6 +74,19 @@ describe('imports', () => {
     );
 
   });
+
+  it('`$locales/es` returns the translations for that language', async () => { 
+    const plugin = svelteIntlPrecompile('locales');
+    const content = await plugin.load('$locales/es');
+    expect(content).toBe(singleLineString`
+      import { __interpolate } from "svelte-intl-precompile";
+      export default {
+        "simple": "Cadena simple",
+        "interpolated": value => \`Cadena con un \${__interpolate(value)} interpolado\`
+      };`
+    );
+
+  });
 });
 
 function singleLineString([str]: TemplateStringsArray) {
