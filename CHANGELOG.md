@@ -1,3 +1,5 @@
+## 0.12.0
+- Now the `$date`, `$time` and `$number` stores automatically update when the current locale changes.
 ## 0.11.0
 - Update precompile-intl-runtime, which contains improvements in the algorithm that chooses the best locale from the locale HTTP header of a request.
 ## 0.11.0-beta.2
