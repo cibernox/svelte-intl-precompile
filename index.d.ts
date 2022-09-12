@@ -1,4 +1,6 @@
-export * from 'precompile-intl-runtime';
+declare module 'svelte-intl-precompile' {
+  export * from 'precompile-intl-runtime';
+}
 
 declare module '$locales' {
   /** Registers all locales found in `localesRoot`. */
